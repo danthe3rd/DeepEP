@@ -37,8 +37,13 @@ if __name__ == '__main__':
 
     cxx_flags = ['-O3', '-Wno-deprecated-declarations', '-Wno-unused-variable', '-Wno-sign-compare', '-Wno-reorder', '-Wno-attributes']
     nvcc_flags = ['-O3', '-Xcompiler', '-O3']
-    sources = ['csrc/deep_ep.cpp', 'csrc/kernels/runtime.cu', 'csrc/kernels/layout.cu', 'csrc/kernels/intranode.cu']
     include_dirs = ['csrc/']
+    sources = [
+        'csrc/deep_ep.cpp',
+        'csrc/kernels/runtime.cu',
+        'csrc/kernels/layout.cu',
+        'csrc/kernels/intranode.cu'
+    ]
     library_dirs = []
     nvcc_dlink = []
     extra_link_args = []
@@ -47,6 +52,7 @@ if __name__ == '__main__':
     if disable_nvshmem:
         cxx_flags.append('-DDISABLE_NVSHMEM')
         nvcc_flags.append('-DDISABLE_NVSHMEM')
+        nvcc_dlink.extend(['-dlink'])
     else:
         sources.extend(['csrc/kernels/internode.cu', 'csrc/kernels/internode_ll.cu'])
         include_dirs.extend([f'{nvshmem_dir}/include'])
