@@ -121,7 +121,7 @@ if __name__ == '__main__':
 
     setuptools.setup(
         name='deep_ep',
-        version='1.2.1' + revision,
+        version='1.2.1' + revision + "danfork",
         packages=setuptools.find_packages(
             include=['deep_ep']
         ),
